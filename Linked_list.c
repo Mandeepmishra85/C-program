@@ -1,7 +1,6 @@
 //Program of Linked-List
 #include <stdio.h>
 #include <stdlib.h>
-//#include <malloc.h>
 
 struct node
 {
@@ -15,18 +14,14 @@ struct node *newnode;
 //Ins-Begin
 int insbegin()
 {
-    //create();
-    int data;
-    // struct node *newnode, *ptr;
-    newnode = malloc(sizeof(struct node));
 
-//    if (newnode == NULL) {
-//        printf("Out of memory:");
-//        exit(0);
-//    }
+    int data;
+
+    newnode = malloc(sizeof(struct node));
     printf("Enter the data for the node:");
 
     scanf("%d",&newnode->info);
+    getchar();
     //newnode->next = NULL;
     if (head == NULL)
     {
@@ -34,9 +29,9 @@ int insbegin()
     }
     else
     {
-       ptr = head;
-       newnode->next=ptr;
-       head=newnode;
+        ptr = head;
+        newnode->next=ptr;
+        head=newnode;
     }
 
     return 0;
@@ -44,19 +39,10 @@ int insbegin()
 //Ins-End
 int insend()
 {
-
-    //create();
-    // struct node *newnode, *ptr;
     newnode = malloc(sizeof(struct node));
-
-//    if (newnode == NULL) {
-//        printf("Out of memory:");
-//        exit(0);
-//    }
     printf("Enter the data for the node:");
-
     scanf("%d",&newnode->info);
-    //newnode->next = NULL;
+    getchar();
     if (head == NULL)
     {
         head = newnode;
@@ -70,7 +56,6 @@ int insend()
         }
         ptr->next=newnode;
     }
-    //newnode->info=data;
     newnode->next=NULL;
     return 0;
 }
@@ -78,32 +63,11 @@ int insend()
 int insspecific(int pos)
 {
     int j;
-    //struct *ptr;
-    //create();
-    // struct node *newnode, *ptr;
     newnode = malloc(sizeof(struct node));
-
-//    if (newnode == NULL) {
-//        printf("Out of memory:");
-//        exit(0);
-//    }
     printf("Enter the data for the node:");
-
     scanf("%d",&newnode->info);
-    //newnode->next = NULL;
-    // if (head == NULL)
-    // {
-    //     head = newnode;
-    // }
-    // else
-    // {
-    //     ptr=head;
-    //     while(ptr->next!=NULL)
-    //     {
-    //         ptr=ptr->next;
-    //     }
-    //     ptr->next=newnode;
-    // }
+    getchar();
+
     ptr=head;
     for(j=0;j<pos-1;j++)
     {
@@ -130,7 +94,8 @@ int delbeign()
     else
     {
         head=head->next;
-        printf("Deleted node info=%d",head->info);
+        printf("Deleted node info=%d\n",head->info);
+        printf("Remaining Nodes;\n");
         free(ptr);
     }
     return 0;
@@ -147,7 +112,8 @@ int delend()
     else if((head->next)==NULL)
     {
         head=NULL;
-        printf("The deleted element->%d",ptr->info);
+        printf("Deleted node info=%d\n",head->info);
+        printf("Remaining Nodes;\n");
         free(ptr);
         exit(0);
     }
@@ -159,9 +125,11 @@ int delend()
             ptr=ptr->next;
         }
         temp->next=NULL;
-        printf("The deleted element is->%d",ptr->info);
+        printf("Deleted node info=%d\n",head->info);
+        printf("Remaining Nodes;\n");
+        free(ptr);
     }
-    free(ptr);
+
     return 0;
 }
 //Deletion at specified
@@ -178,13 +146,14 @@ int delspecified(int pos)
     {
         ptr=head;
         head=head->next;
-        printf("the deleted=%d",ptr->info);
+        printf("Deleted node info=%d\n",head->info);
+        printf("Remaining Nodes;\n");
         free(ptr);
     }
     else
     {
         ptr=head;
-        for(i=0;i<pos-1;i++)
+        for(i=0;i<=pos-1;i++)
         {
             temp=ptr;
             ptr=ptr->next;
@@ -195,103 +164,82 @@ int delspecified(int pos)
             }
         }
         temp->next=ptr->next;
+        free(ptr);
     }
     printf("The deleted number is %d=",ptr->info);
-    free(ptr);
+
     return 0;
 }
 void display()
 {
     int i=0;
     //struct node *ptr;
+    system("clear");
+    printf("Remaining Nodes;\n");
     ptr=head;
-    while(ptr->next!=NULL)
+    while(ptr!=NULL)
     {
 
-        printf("node[%d]->info=%d", i, ptr->info);
+        printf("node[%d]->info=%d\n", i, ptr->info);
+        ptr=ptr->next;
         i=i+1;
     }
 }
 char prompt()
 {
     char z;
-    printf("Press <1> for create node\nPress <2> t0 insert node in begin\nPress <3> for insert node in end\nPress <4> for insert node in specified"
-           "\nPress <5> to del node in begin\nPress <6> to del node in end\nPress <7> to del node in specified--->");
+    printf("Press <1> t0 insert node in begin\nPress <2> for insert node in end\nPress <3> for insert node in specified"
+           "\nPress <4> to del node in begin\nPress <5> to del node in end\nPress <6> to del node in specified--->\t");
     scanf("%c",&z);
+    getchar();
     return z;
 }
 int main()
 {
-    int pos;
+    int pos,data;
     char status,check;
-    status=prompt();
-    switch(status)
+    while(1)
     {
-        case '1':
-            //up:
-            //create();
-
-
-//            if (newnode == NULL) {
-//                printf("Out of memory:");
-//                exit(0);
-//            }
-            printf("Enter the data for the node:");
-
-            scanf("%d",&newnode->info);
-            //newnode->next = NULL;
-            if (head == NULL)
-            {
-                head = newnode;
-            }
-            else
-            {
-                ptr=head;
-                while(ptr->next!=NULL)
-                {
-                    ptr=ptr->next;
-                }
-                ptr->next=newnode;
-            }
-
-
-            display();
-            break;
-        case '2':
-            //create();
-            printf("Your Decision goes to insert in first\n");
-            insbegin();
-            display();
-            break;
-        case '3':
-            insend();
-            printf("Your Decision goes to insert in end\n");
-            display();
-            break;
-        case '4':
-            printf("enter the position");
-            scanf("%d",&pos);
-            printf("Your Decision goes to insert in specific\n");
-            insspecific(pos);
-            display();
-            break;
-        case '5':
-            printf("Your decision goes to delete in first\n");
-            delbeign();
-            display();
-            break;
-        case '6':
-            printf("Your decision goes to delete in end\n");
-            delend();
-            display();
-            break;
-        case '7':
-            printf("Your decision goes to delete in position\n");
-            printf("enter the position");
-            scanf("%d",&pos);
-            delspecified(pos);
-            display();
-            break;
+        status = prompt();
+        switch (status) {
+            case '1':
+                //create();
+                printf("Your Decision goes to insert in first\n");
+                insbegin();
+                system("clear");
+                display();
+                //system(clear);
+                break;
+            case '2':
+                insend();
+                printf("Your Decision goes to insert in end\n");
+                display();
+                break;
+            case '3':
+                printf("enter the position");
+                scanf("%d", &pos);
+                printf("Your Decision goes to insert in specific\n");
+                insspecific(pos);
+                display();
+                break;
+            case '4':
+                printf("Your decision goes to delete in first\n");
+                delbeign();
+                display();
+                break;
+            case '5':
+                printf("Your decision goes to delete in end\n");
+                delend();
+                display();
+                break;
+            case '6':
+                printf("Your decision goes to delete in position\n");
+                printf("enter the position");
+                scanf("%d", &pos);
+                delspecified(pos);
+                display();
+                break;
+        }
     }
     return 0;
 }
