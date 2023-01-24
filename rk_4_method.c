@@ -1,9 +1,6 @@
 //
 // Created by Mandeep Mishra on 18/01/2023.
 //
-//
-// Created by Mandeep Mishra on 18/01/2023.
-//
 #include <stdio.h>
 #include <stdio.h>
 #include <math.h>
